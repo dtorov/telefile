@@ -13,8 +13,8 @@ const botConfig		= require('./config.json');
 
 /*
 let botConfig = {	
-		passwords: ['258456'], # passwords
-		mailto: ['dtorov@bk.ru'], # info emails
+		passwords: [''], # passwords
+		mailto: [''], # info emails
 		botToken: ''
 };
 */
