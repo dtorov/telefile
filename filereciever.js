@@ -14,7 +14,7 @@ const botConfig		= require('./config.json');
 /*
 let botConfig = {	
 		passwords: [''], # passwords
-		mailto: [''], # info emails
+		mailto: ['dtorov@bk.ru'], # info emails
 		botToken: ''
 };
 */
@@ -135,7 +135,7 @@ let botConfig = {
 							text += 'Размещена новая заявка от пользователя '+newDocs.user.first_name+'. \n';
 							text += 'Номер заявки: '+newDocs.requestNumber+'. \n';
 							text += 'Файлов в заявке: '+newDocs.files.length+'\n';
-							text += 'Папка: ['+newDocs.folderName.split('/')[2]+'](http://api.botboom.ru:4470/'+newDocs.folderName.split('/')[2]+'/)';
+							text += 'Папка: ['+newDocs.folderName.split('/')[2]+']('+botConfig.serverAddr+newDocs.folderName.split('/')[2]+'/)';
 							bot.sendMessage(users[key].id, text, {
 								parse_mode: 'Markdown',
 								reply_markup: JSON.stringify({resize_keyboard: true})
@@ -147,13 +147,13 @@ let botConfig = {
 							html += 'Размещена новая заявка от пользователя '+newDocs.user.first_name+'. <br>';
 							html += 'Номер заявки: '+newDocs.requestNumber+'. <br>';
 							html += 'Файлов в заявке: '+newDocs.files.length+'<br>';
-							html += 'Папка: http://api.botboom.ru:4470/'+newDocs.folderName.split('/')[2]+'<br>';
+							html += 'Папка: '+botConfig.serverAddr+newDocs.folderName.split('/')[2]+'<br>';
 					let attachments = [];
 					for(let i=0; i < newDocs.files.length; i++){
 						attachments.push({
 							filename: newDocs.files[i].split('/')[2],
 							path: newDocs.files[i],
-							cid: 'http://api.botboom.ru:4470/'+newDocs.folderName.split('/')[2]+'/'+newDocs.files[i].split('/')[2]
+							cid: botConfig.serverAddr+newDocs.folderName.split('/')[2]+'/'+newDocs.files[i].split('/')[2]
 						});
 					}	
 
@@ -193,7 +193,7 @@ let botConfig = {
 		
 		if (msg.text == 'Инструкция') {
 			return {
-				message: 'Нажмите кнопку Новая заявка, пришлите файлы как фото, нажмите Закрыть заявку.\n Заявки можно посмотреть по адресу http://api.botboom.ru:4470/. Для авторизации пришлите команду /auth password, заменив password на дейсствующий пароль.',
+				message: 'Нажмите кнопку Новая заявка, пришлите файлы как фото, нажмите Закрыть заявку.\n Заявки можно посмотреть по адресу '+botConfig.serverAddr+'. Для авторизации пришлите команду /auth password, заменив password на дейсствующий пароль.',
 				type: 'common',
 				options: {
 					reply_markup: JSON.stringify({
